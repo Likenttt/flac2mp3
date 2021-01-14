@@ -259,9 +259,11 @@ if __name__ == '__main__':
         '''Transcode the given file and print out progress statistics.'''
 
         short_fname = os.path.basename(f)
+        log.info("Filetype: '%s'", get_filetype(f))
 
         # copy any non-FLAC files to the output dir if they match a pattern
-        if 'audio/x-flac' not in get_filetype(f):
+        # previously this magic format is 'audio/x-flac'.It will skip.
+        if 'audio/flac' not in get_filetype(f):
             if args.output_dir is not None and args.copy_pattern is not None:
                 match = args.copy_pattern.search(f)
                 if match is not None:
